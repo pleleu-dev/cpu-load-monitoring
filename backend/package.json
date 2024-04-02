@@ -1,0 +1,28 @@
+{
+  "name": "cpu-monitoring-backend",
+  "version": "0.0.1",
+  "description": "A small CPU monitoring service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleleu-dev/cpu-load-monitoring.git"
+  },
+  "keywords": [
+    "node",
+    "CPU",
+    "monitoring",
+    "service"
+  ],
+  "author": "P.Leleu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pleleu-dev/cpu-load-monitoring/issues"
+  },
+  "homepage": "https://github.com/pleleu-dev/cpu-load-monitoring#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

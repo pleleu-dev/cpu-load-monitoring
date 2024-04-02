@@ -46,3 +46,25 @@ Thresholds for high load and recovery:
 
 - A CPU is considered under high average load when it has exceeded 1 for 2 minutes or more.
 - A CPU is considered recovered from high average load when it drops below 1 for 2 minutes or more.
+
+## How to simulate CPU load on a Linux machine
+
+You can install stress on Linux, use the following appropriate command for your specific Linux distribution.
+
+```bash
+sudo apt install stress         [On Debian, Ubuntu and Mint]
+sudo yum install stress         [On RHEL/CentOS/Fedora and Rocky/AlmaLinux]
+sudo emerge -a sys-apps/stress  [On Gentoo Linux]
+sudo apk add stress             [On Alpine Linux]
+sudo pacman -S stress           [On Arch Linux]
+sudo zypper install stress      [On OpenSUSE]
+sudo pkg install stress         [On FreeBSD]
+```
+
+You can then run the following command to simulate CPU load:
+
+```bash
+stress --cpu 4 --timeout 60
+```
+
+In this example, the command will simulate CPU load on 4 cores for 60 seconds.

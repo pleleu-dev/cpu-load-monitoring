@@ -1,0 +1,29 @@
+{
+  "name": "cpu-load-monitoring",
+  "version": "0.0.1",
+  "description": "A browser-based CPU load monitoring application",
+  "scripts": {
+    "server": "node ./backend/index.js",
+    "client": "yarn --cwd ./frontend run dev",
+    "app": "concurrently \"yarn run server\" \"yarn run client\"",
+    "install": "yarn --cwd ./frontend install && yarn --cwd ./backend install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleleu-dev/cpu-load-monitoring.git"
+  },
+  "keywords": [
+    "CPU",
+    "monitoring",
+    "service"
+  ],
+  "author": "P.Leleu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pleleu-dev/cpu-load-monitoring/issues"
+  },
+  "homepage": "https://github.com/pleleu-dev/cpu-load-monitoring#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

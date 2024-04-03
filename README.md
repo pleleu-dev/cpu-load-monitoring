@@ -47,6 +47,22 @@ Thresholds for high load and recovery:
 - A CPU is considered under high average load when it has exceeded 1 for 2 minutes or more.
 - A CPU is considered recovered from high average load when it drops below 1 for 2 minutes or more.
 
+## How to install the application
+
+```bash
+yarn run install
+```
+
+This will install the dependencies for the backend and frontend applications.
+
+## How to run the application
+
+```bash
+yarn run app
+```
+
+This will start the backend and frontend applications.
+
 ## How to simulate CPU load on a Linux machine
 
 You can install stress on Linux, use the following appropriate command for your specific Linux distribution.

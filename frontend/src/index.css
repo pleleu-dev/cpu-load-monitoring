@@ -1,0 +1,19 @@
+:root {
+  --background: #222831;
+  --text: #eeeeee;
+  --primary: #76abae;
+  --secondary: #31363f;
+  --low: #00b894;
+  --heavy: #d63031;
+  --dark: #191919;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: var(--dark);
+  color: var(--text);
+}

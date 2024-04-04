@@ -1,0 +1,40 @@
+.main {
+  display: grid;
+  grid-template-areas:
+    'cu av av av'
+    're he he he';
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 300px 300px;
+  gap: 10px 10px;
+  grid-auto-flow: row;
+  margin: 1rem 10%;
+}
+
+.current {
+  grid-area: cu;
+}
+
+.average {
+  grid-area: av;
+}
+
+.heavy {
+  grid-area: he;
+}
+
+.recovery {
+  grid-area: re;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    grid-template-areas:
+      'cu'
+      'av'
+      'he'
+      're';
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px 300px 300px 300px;
+  }
+}

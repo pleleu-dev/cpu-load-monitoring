@@ -9,16 +9,19 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+
 import { GoCpu } from 'react-icons/go'
 import { VscPulse } from 'react-icons/vsc'
 import { FiBarChart2 } from 'react-icons/fi'
 import { RiHeartPulseLine } from 'react-icons/ri'
 
+import { Card } from '../Card'
+
 import { cssValue } from '../utils'
 
 import layout from './layout.module.css'
 import app from './app.module.css'
-import card from './card.module.css'
+import card from '../Card/card.module.css'
 
 function App() {
   const data = [
@@ -67,80 +70,78 @@ function App() {
       </header>
       <main className={`${layout.main} ${app.main}`}>
         <section className={layout.current}>
-          <header className={card.header}>
-            <h2>Current average load</h2>
-            <GoCpu size={36} />
-          </header>
-          <p
-            className={
-              isUnderHeavyLoad ? card['indicator-heavy'] : card['indicator-low']
-            }
-          >
-            {currentLoad ? currentLoad.average : 'Loading...'}
-          </p>
-          <p className={card.info}> 1 min load average </p>
+          <Card title='Current average load' Icon={GoCpu}>
+            <p
+              className={
+                isUnderHeavyLoad
+                  ? card['indicator-heavy']
+                  : card['indicator-low']
+              }
+            >
+              {currentLoad ? currentLoad.average : 'Loading...'}
+            </p>
+            <p className={card.info}> 1 min load average </p>
+          </Card>
         </section>
         <section className={layout.average}>
-          <header className={card.header}>
-            <h2>Average load</h2>
-            <VscPulse size={36} />
-          </header>
-          <div className={card.chart}>
-            <ResponsiveContainer width='100%' height='100%'>
-              <LineChart data={adaptedData}>
-                <Line type='monotone' dataKey='average' stroke={primaryColor} />
-                <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
-                <XAxis dataKey='formattedTime' stroke={textColor} />
-                <YAxis stroke={textColor} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <Card title='Average load' Icon={VscPulse}>
+            <div className={card.chart}>
+              <ResponsiveContainer width='100%' height='100%'>
+                <LineChart data={adaptedData}>
+                  <Line
+                    type='monotone'
+                    dataKey='average'
+                    stroke={primaryColor}
+                  />
+                  <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
+                  <XAxis dataKey='formattedTime' stroke={textColor} />
+                  <YAxis stroke={textColor} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
         </section>
         <section className={layout.recovery}>
-          <header className={card.header}>
-            <h2>Recovery summary</h2>
-            <RiHeartPulseLine size={36} />
-          </header>
-          <div role='grid' className={card.grid}>
-            {adaptedData.map((item) => (
-              <div
-                key={item.time}
-                role='gridcell'
-                className={
-                  item.average > 1 ? card['square-heavy'] : card['square-low']
-                }
-              >
-                <p role='tooltip' className={card.tooltip}>
-                  {item.formattedTime}
-                </p>
-              </div>
-            ))}
-          </div>
-          {isUnderHeavyLoad ? (
-            <p className={card.info}>Under heavy load</p>
-          ) : (
-            <p className={card.info}>
-              Last recovery at {lastRecovery?.formattedTime}
-            </p>
-          )}
+          <Card title='Recovery summary' Icon={RiHeartPulseLine}>
+            <div role='grid' className={card.grid}>
+              {adaptedData.map((item) => (
+                <div
+                  key={item.time}
+                  role='gridcell'
+                  className={
+                    item.average > 1 ? card['square-heavy'] : card['square-low']
+                  }
+                >
+                  <p role='tooltip' className={card.tooltip}>
+                    {item.formattedTime}
+                  </p>
+                </div>
+              ))}
+            </div>
+            {isUnderHeavyLoad ? (
+              <p className={card.info}>Under heavy load</p>
+            ) : (
+              <p className={card.info}>
+                Last recovery at {lastRecovery?.formattedTime}
+              </p>
+            )}
+          </Card>
         </section>
         <section className={layout.heavy}>
-          <header className={card.header}>
-            <h2>CPU heavy load</h2>
-            <FiBarChart2 size={36} />
-          </header>
-          <div className={card.chart}>
-            <ResponsiveContainer width='100%' height='100%'>
-              <BarChart data={dataHeavy}>
-                <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
-                <XAxis dataKey='formattedTime' stroke={textColor} />
-                <YAxis stroke={textColor} />
-                <ReferenceLine y={1} stroke={heavyColor} />
-                <Bar dataKey='low' stackId='a' fill={lowColor} />
-                <Bar dataKey='heavy' stackId='a' fill={heavyColor} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <Card title='CPU heavy load' Icon={FiBarChart2}>
+            <div className={card.chart}>
+              <ResponsiveContainer width='100%' height='100%'>
+                <BarChart data={dataHeavy}>
+                  <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
+                  <XAxis dataKey='formattedTime' stroke={textColor} />
+                  <YAxis stroke={textColor} />
+                  <ReferenceLine y={1} stroke={heavyColor} />
+                  <Bar dataKey='low' stackId='a' fill={lowColor} />
+                  <Bar dataKey='heavy' stackId='a' fill={heavyColor} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </Card>
         </section>
       </main>
     </>

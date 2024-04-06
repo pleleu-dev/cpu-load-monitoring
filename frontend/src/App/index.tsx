@@ -16,6 +16,7 @@ import { RiHeartPulseLine } from 'react-icons/ri'
 import { Card } from '../Card'
 import { Current } from '../Current'
 import { Average } from '../Average'
+import { Recovery } from '../Recovery'
 
 import { getColors } from '../utils'
 
@@ -52,13 +53,6 @@ function App() {
 
     return { ...item, heavy: 0, low: item.average }
   })
-  const currentLoad = adaptedData.at(-1)
-  const isUnderHeavyLoad = currentLoad && currentLoad.average > 1
-  const heavyLoadArr = adaptedData.filter((item) => item.average > 1)
-  const lastHeavy = heavyLoadArr.at(-1)
-  const lastRecovery = lastHeavy
-    ? adaptedData.find((item) => item.time > lastHeavy.time)
-    : adaptedData[0]
 
   return (
     <>
@@ -78,28 +72,7 @@ function App() {
         </section>
         <section className={layout.recovery}>
           <Card title='Recovery summary' Icon={RiHeartPulseLine}>
-            <div role='grid' className={card.grid}>
-              {adaptedData.map((item) => (
-                <div
-                  key={item.time}
-                  role='gridcell'
-                  className={
-                    item.average > 1 ? card['square-heavy'] : card['square-low']
-                  }
-                >
-                  <p role='tooltip' className={card.tooltip}>
-                    {item.formattedTime}
-                  </p>
-                </div>
-              ))}
-            </div>
-            {isUnderHeavyLoad ? (
-              <p className={card.info}>Under heavy load</p>
-            ) : (
-              <p className={card.info}>
-                Last recovery at {lastRecovery?.formattedTime}
-              </p>
-            )}
+            <Recovery data={adaptedData} />
           </Card>
         </section>
         <section className={layout.heavy}>

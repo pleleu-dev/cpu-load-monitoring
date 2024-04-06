@@ -1,7 +1,5 @@
 import {
   ResponsiveContainer,
-  LineChart,
-  Line,
   BarChart,
   Bar,
   ReferenceLine,
@@ -17,8 +15,9 @@ import { RiHeartPulseLine } from 'react-icons/ri'
 
 import { Card } from '../Card'
 import { Current } from '../Current'
+import { Average } from '../Average'
 
-import { cssValue } from '../utils'
+import { getColors } from '../utils'
 
 import layout from './layout.module.css'
 import app from './app.module.css'
@@ -27,6 +26,7 @@ import card from '../Card/card.module.css'
 import type { ApiLoad, Load } from '../types'
 
 function App() {
+  const colors = getColors()
   const data: ApiLoad[] = [
     { time: 1712299156981, average: 0.1 },
     { time: 1712299159991, average: 0.2 },
@@ -52,12 +52,6 @@ function App() {
 
     return { ...item, heavy: 0, low: item.average }
   })
-  const heavyColor = cssValue('--heavy')
-  const lowColor = cssValue('--low')
-  const textColor = cssValue('--text')
-  const darkColor = cssValue('--dark')
-  const primaryColor = cssValue('--primary')
-
   const currentLoad = adaptedData.at(-1)
   const isUnderHeavyLoad = currentLoad && currentLoad.average > 1
   const heavyLoadArr = adaptedData.filter((item) => item.average > 1)
@@ -79,20 +73,7 @@ function App() {
         </section>
         <section className={layout.average}>
           <Card title='Average load' Icon={VscPulse}>
-            <div className={card.chart}>
-              <ResponsiveContainer width='100%' height='100%'>
-                <LineChart data={adaptedData}>
-                  <Line
-                    type='monotone'
-                    dataKey='average'
-                    stroke={primaryColor}
-                  />
-                  <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
-                  <XAxis dataKey='formattedTime' stroke={textColor} />
-                  <YAxis stroke={textColor} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+            <Average data={adaptedData} />
           </Card>
         </section>
         <section className={layout.recovery}>
@@ -126,12 +107,12 @@ function App() {
             <div className={card.chart}>
               <ResponsiveContainer width='100%' height='100%'>
                 <BarChart data={dataHeavy}>
-                  <CartesianGrid stroke={darkColor} strokeDasharray='5 5' />
-                  <XAxis dataKey='formattedTime' stroke={textColor} />
-                  <YAxis stroke={textColor} />
-                  <ReferenceLine y={1} stroke={heavyColor} />
-                  <Bar dataKey='low' stackId='a' fill={lowColor} />
-                  <Bar dataKey='heavy' stackId='a' fill={heavyColor} />
+                  <CartesianGrid stroke={colors.dark} strokeDasharray='5 5' />
+                  <XAxis dataKey='formattedTime' stroke={colors.text} />
+                  <YAxis stroke={colors.text} />
+                  <ReferenceLine y={1} stroke={colors.heavy} />
+                  <Bar dataKey='low' stackId='a' fill={colors.low} />
+                  <Bar dataKey='heavy' stackId='a' fill={colors.heavy} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

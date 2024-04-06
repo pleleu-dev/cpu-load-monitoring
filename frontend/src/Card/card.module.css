@@ -11,22 +11,6 @@
   height: 100%;
 }
 
-.indicator {
-  font-size: 5rem;
-  text-align: center;
-  justify-self: center;
-}
-
-.indicator-heavy {
-  composes: indicator;
-  color: var(--heavy);
-}
-
-.indicator-low {
-  composes: indicator;
-  color: var(--low);
-}
-
 .grid {
   display: flex;
   flex-direction: row;
@@ -83,8 +67,4 @@
   border-width: 5px;
   border-style: solid;
   border-color: var(--background) transparent transparent transparent;
-}
-
-.info {
-  align-self: flex-end;
 }

@@ -16,6 +16,7 @@ import { FiBarChart2 } from 'react-icons/fi'
 import { RiHeartPulseLine } from 'react-icons/ri'
 
 import { Card } from '../Card'
+import { Current } from '../Current'
 
 import { cssValue } from '../utils'
 
@@ -23,8 +24,10 @@ import layout from './layout.module.css'
 import app from './app.module.css'
 import card from '../Card/card.module.css'
 
+import type { ApiLoad, Load } from '../types'
+
 function App() {
-  const data = [
+  const data: ApiLoad[] = [
     { time: 1712299156981, average: 0.1 },
     { time: 1712299159991, average: 0.2 },
     { time: 1712299160001, average: 0.3 },
@@ -37,7 +40,7 @@ function App() {
     { time: 1712299156071, average: 0.4 },
   ]
 
-  const adaptedData = data.map((item) => {
+  const adaptedData: Load[] = data.map((item) => {
     const date = new Date(item.time)
     return { ...item, formattedTime: date.toLocaleTimeString() }
   })
@@ -71,16 +74,7 @@ function App() {
       <main className={`${layout.main} ${app.main}`}>
         <section className={layout.current}>
           <Card title='Current average load' Icon={GoCpu}>
-            <p
-              className={
-                isUnderHeavyLoad
-                  ? card['indicator-heavy']
-                  : card['indicator-low']
-              }
-            >
-              {currentLoad ? currentLoad.average : 'Loading...'}
-            </p>
-            <p className={card.info}> 1 min load average </p>
+            <Current data={adaptedData} />
           </Card>
         </section>
         <section className={layout.average}>

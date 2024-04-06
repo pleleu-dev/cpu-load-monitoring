@@ -1,13 +1,3 @@
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  ReferenceLine,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-} from 'recharts'
-
 import { GoCpu } from 'react-icons/go'
 import { VscPulse } from 'react-icons/vsc'
 import { FiBarChart2 } from 'react-icons/fi'
@@ -17,17 +7,14 @@ import { Card } from '../Card'
 import { Current } from '../Current'
 import { Average } from '../Average'
 import { Recovery } from '../Recovery'
-
-import { getColors } from '../utils'
+import { Heavy } from '../Heavy'
 
 import layout from './layout.module.css'
 import app from './app.module.css'
-import card from '../Card/card.module.css'
 
 import type { ApiLoad, Load } from '../types'
 
 function App() {
-  const colors = getColors()
   const data: ApiLoad[] = [
     { time: 1712299156981, average: 0.1 },
     { time: 1712299159991, average: 0.2 },
@@ -44,14 +31,6 @@ function App() {
   const adaptedData: Load[] = data.map((item) => {
     const date = new Date(item.time)
     return { ...item, formattedTime: date.toLocaleTimeString() }
-  })
-
-  const dataHeavy = adaptedData.map((item) => {
-    if (item.average > 1) {
-      return { ...item, heavy: item.average - 1, low: 1 }
-    }
-
-    return { ...item, heavy: 0, low: item.average }
   })
 
   return (
@@ -77,18 +56,7 @@ function App() {
         </section>
         <section className={layout.heavy}>
           <Card title='CPU heavy load' Icon={FiBarChart2}>
-            <div className={card.chart}>
-              <ResponsiveContainer width='100%' height='100%'>
-                <BarChart data={dataHeavy}>
-                  <CartesianGrid stroke={colors.dark} strokeDasharray='5 5' />
-                  <XAxis dataKey='formattedTime' stroke={colors.text} />
-                  <YAxis stroke={colors.text} />
-                  <ReferenceLine y={1} stroke={colors.heavy} />
-                  <Bar dataKey='low' stackId='a' fill={colors.low} />
-                  <Bar dataKey='heavy' stackId='a' fill={colors.heavy} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+            <Heavy data={adaptedData} />{' '}
           </Card>
         </section>
       </main>

@@ -1,0 +1,9 @@
+.message {
+  color: var(--primary);
+  padding: 10px;
+  font-weight: bold;
+}
+
+.error {
+  color: var(--heavy);
+}

@@ -8,15 +8,20 @@ import { Current } from '../Current'
 import { Average } from '../Average'
 import { Recovery } from '../Recovery'
 import { Heavy } from '../Heavy'
+import { Notification } from '../Notification'
 
 import layout from '../styles/layout.module.css'
 import type { Load } from '../types'
 
 function CPU() {
   const data: Load[] = []
+  const status = 'idle'
 
   return (
     <>
+      <section className={layout.notification}>
+        <Notification status={status} />
+      </section>
       <section className={layout.current}>
         <Card title='Current average load' Icon={GoCpu}>
           <Current data={data} />

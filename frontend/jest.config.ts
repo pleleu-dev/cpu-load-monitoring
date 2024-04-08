@@ -1,5 +1,8 @@
 export default {
   testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    url: 'https://fakeUrl.com/',
+  },
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

@@ -9,13 +9,12 @@ import { Average } from '../Average'
 import { Recovery } from '../Recovery'
 import { Heavy } from '../Heavy'
 import { Notification } from '../Notification'
+import { useAverageCPULoad } from '../hooks/useAverageCPULoad'
 
 import layout from '../styles/layout.module.css'
-import type { Load } from '../types'
 
 function CPU() {
-  const data: Load[] = []
-  const status = 'idle'
+  const { data, status } = useAverageCPULoad()
 
   return (
     <>

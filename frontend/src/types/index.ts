@@ -5,7 +5,9 @@ type Load = {
 }
 
 type ApiLoad = {
-  average: number
-  time: number
+  cpu: {
+    average: number
+    time: number
+  }
 }
 export type { Load, ApiLoad }

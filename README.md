@@ -9,24 +9,24 @@ Proof-of-concept for a browser-based CPU load monitoring application. This appli
 
 A user should be able to view your application to answer the following questions about their computer:
 
-- [ ] What is my computer's current average CPU load?
-- [ ] How did the average CPU load change over a 10 minute window?
-- [ ] Has my computer been under heavy CPU load for 2 minutes or more? When? How many times?
-- [ ] Has my computer recovered from heavy CPU load? When? How many times?
+- [x] What is my computer's current average CPU load?
+- [x] How did the average CPU load change over a 10 minute window?
+- [x] Has my computer been under heavy CPU load for 2 minutes or more? When? How many times?
+- [x] Has my computer recovered from heavy CPU load? When? How many times?
 
 ## Product requirements:
 
-- [ ] The front-end application should communicate with a local back-end service to retrieve CPU load average information from your computer (see below).
-- [ ] The front-end application should retrieve CPU load information every 10 seconds.
-- [ ] The front-end application should maintain a 10 minute window of historical CPU load information.
-- [ ] The front-end application should alert the user to high CPU load.
-- [ ] The front-end application should alert the user when CPU load has recovered.
+- [x] The front-end application should communicate with a local back-end service to retrieve CPU load average information from your computer (see below).
+- [x] The front-end application should retrieve CPU load information every 10 seconds.
+- [x] The front-end application should maintain a 10 minute window of historical CPU load information.
+- [x] The front-end application should alert the user to high CPU load.
+- [x] The front-end application should alert the user when CPU load has recovered.
 
 ## Engineering requirements:
 
-- [ ] The alerting logic in your application should have tests.
-- [ ] The back-end service does not need to persist data.
-- [ ] Please write up a small explanation of how you would extend or improve your application design if you were building this for production.
+- [x] The alerting logic in your application should have tests.
+- [x] The back-end service does not need to persist data.
+- [x] Please write up a small explanation of how you would extend or improve your application design if you were building this for production.
 
 ## CPU Load Average
 
@@ -84,3 +84,31 @@ stress --cpu 4 --timeout 60
 ```
 
 In this example, the command will simulate CPU load on 4 cores for 60 seconds.
+
+## Building for production
+
+If you were building this application for production, you could consider the following improvements:
+
+### Process
+
+- Accessibility: Ensure the application is accessible to users with disabilities by following WCAG guidelines.
+- Code review: Have a code review process in place to ensure code quality and consistency.
+- Testing: Implement a comprehensive testing strategy that includes unit tests, integration tests, end-to-end tests and QA testing.
+- CI/CD: Implement a CI/CD pipeline to automate the build, test and deployment process.
+- Monitoring: Implement monitoring and alerting to track the performance and health of the application.
+- Security: Enforce robust security practices like user authentication, data encryption.
+- Documentation: Create comprehensive documentation covering the application's functionality, deployment instructions, and maintenance procedures.
+
+### Build
+
+- Multi-platform support: Ensure the application works on different operating systems.
+- Performance Optimization: Implement performance optimization strategies like code optimization, caching, and content delivery networks (CDNs).
+
+### Backend
+
+- Persistence: Implement a database to persist historical CPU load data for analysis and reporting.
+- Scalability: Design a scalable backend architecture to handle potential increases in user traffic or data volume.
+
+### Architecture
+
+- WebSockets: We could consider establishing a WebSocket connection between the client and server. The client-side code would periodically calculate its CPU usage and send it to the server through the WebSocket. The server would then receive and process the client-side CPU data.

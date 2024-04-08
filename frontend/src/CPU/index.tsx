@@ -13,13 +13,13 @@ import { useAverageCPULoad } from '../hooks/useAverageCPULoad'
 
 import layout from '../styles/layout.module.css'
 
-function CPU() {
+export function CPU() {
   const { data, status } = useAverageCPULoad()
 
   return (
     <>
       <section className={layout.notification}>
-        <Notification status={status} />
+        <Notification status={status} data={data} />
       </section>
       <section className={layout.current}>
         <Card title='Current average load' Icon={GoCpu}>
@@ -44,5 +44,3 @@ function CPU() {
     </>
   )
 }
-
-export { CPU }
